@@ -1,11 +1,13 @@
 #!/bin/bash
 set -e
 
-pushd /var/www
-    if [ -z "vendor" ]; then
-        composer install --no-ansi --no-dev --optimize-autoloader
-    fi
-    while sleep $SLEEP; do php bin/mirror create --no-progress; done
-popd
+pushd /var/www || exit 1
 
-/bin/bash
+# 循环执行镜像创建操作
+while sleep "$SLEEP"; do
+  php bin/mirror create
+done
+
+popd || exit 1
+
+exec /bin/bash

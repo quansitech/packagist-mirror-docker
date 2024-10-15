@@ -37,3 +37,7 @@ services:
             - .:/var/www:cached
         networks:
             - backend
+
+    build-worker:
+        build: .
+        tty: true

@@ -83,6 +83,8 @@ class Http
         // fixed when /something is passed is converted to /
         // now we put a / as suffix and is resolved as /something/
         $this->config['base_uri'] = trim($mirror->getMaster(), '/').'/';
+        $this->config['proxy'] = "http://host.docker.internal:10809";
+
         $this->client = new Client($this->config);
         $this->maxConnections = $maxConnections;
         $this->mirror = $mirror;
